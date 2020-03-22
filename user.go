@@ -40,7 +40,13 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 			json.NewEncoder(w).Encode(fetchData())
 		} else {
 			//Not have query
-			json.NewEncoder(w).Encode(fetchData())
+			data := fetchData()
+			if len(data) > 0 {
+				w.WriteHeader(http.StatusOK)
+				json.NewEncoder(w).Encode(fetchData())
+			} else {
+				w.WriteHeader(http.StatusNoContent)
+			}
 		}
 	}
 }
@@ -55,8 +61,10 @@ func fetchData() []map[string]interface{} {
 		}
 		if err != nil {
 			log.Fatalf("Failed to iterate : %v ", err)
+		} else {
+			data = append(data, doc.Data())
 		}
-		data = append(data, doc.Data())
+
 	}
 	return data
 }
