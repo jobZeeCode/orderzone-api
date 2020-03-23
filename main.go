@@ -14,6 +14,7 @@ func main() {
 	http.HandleFunc("/shop", ShopHandler)
 	http.HandleFunc("/menu", MenuHandler)
 	http.HandleFunc("/order", OrderHandler)
+	http.HandleFunc("/order/detail", OrderDetailHandler)
 	http.ListenAndServe(getPort(), nil)
 }
 
