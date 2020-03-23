@@ -11,6 +11,7 @@ func main() {
 		fmt.Fprintln(w, "hello World google App Engine with Golang")
 	})
 	http.HandleFunc("/user", UserHandler)
+	http.HandleFunc("/shop", ShopHandler)
 	http.ListenAndServe(getPort(), nil)
 }
 
