@@ -13,6 +13,7 @@ func main() {
 	http.HandleFunc("/user", UserHandler)
 	http.HandleFunc("/shop", ShopHandler)
 	http.HandleFunc("/menu", MenuHandler)
+	http.HandleFunc("/order", OrderHandler)
 	http.ListenAndServe(getPort(), nil)
 }
 
