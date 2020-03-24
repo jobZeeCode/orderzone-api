@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
 )
 
 type shopStruct struct {
-	ID interface{}
-	Name interface{}
+	ID          interface{}
+	Name        interface{}
 	Description interface{}
-	Addr interface{}
-	Type interface{}
-	Pic interface{}
+	Addr        interface{}
+	Type        interface{}
+	Pic         interface{}
+	UserID      interface{}
 }
 
 //ShopHandler : manage shop database
@@ -24,6 +24,7 @@ func ShopHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, content-type")
+	w.Header().Set("Access-control-Allow-Origin", "http://localhost:3000")
 	defer client.Close()
 
 	switch r.Method {
@@ -53,7 +54,7 @@ func ShopHandler(w http.ResponseWriter, r *http.Request) {
 		break
 	case "POST":
 		//insert data
-		var shop shopStruct 
+		var shop shopStruct
 		err := json.NewDecoder(r.Body).Decode(&shop)
 		if err != nil {
 			log.Fatalf("Fail Decoder : %v ", err)
@@ -69,7 +70,7 @@ func ShopHandler(w http.ResponseWriter, r *http.Request) {
 		break
 	case "PUT":
 		//Edit data
-		var shop shopStruct 
+		var shop shopStruct
 		err := json.NewDecoder(r.Body).Decode(&shop)
 		if err != nil {
 			log.Fatalf("Failt Decoder : %v ", err)

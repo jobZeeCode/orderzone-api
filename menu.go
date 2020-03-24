@@ -24,6 +24,7 @@ func MenuHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, content-type")
+	w.Header().Set("Access-control-Allow-Origin", "http://localhost:3000")
 	defer client.Close()
 
 	switch r.Method {

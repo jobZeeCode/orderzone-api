@@ -8,20 +8,21 @@ import (
 )
 
 type orderDetailStruct struct {
-	ID interface{}
-	OrderID interface{}
-	MenuID interface{}
-	Amount interface{}
+	ID       interface{}
+	OrderID  interface{}
+	MenuID   interface{}
+	Amount   interface{}
 	NetPrice interface{}
 }
 
 //OrderDetailHandler : manage shop database
-func OrderDetailHandler (w http.ResponseWriter, r *http.Request) {
+func OrderDetailHandler(w http.ResponseWriter, r *http.Request) {
 	client, ctx = Conect()
 	db := "order-detail"
 	w.Header().Set("content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, content-type")
+	w.Header().Set("Access-control-Allow-Origin", "http://localhost:3000")
 	defer client.Close()
 
 	switch r.Method {
@@ -51,7 +52,7 @@ func OrderDetailHandler (w http.ResponseWriter, r *http.Request) {
 		break
 	case "POST":
 		//insert data
-		var orderDetail orderDetailStruct 
+		var orderDetail orderDetailStruct
 		err := json.NewDecoder(r.Body).Decode(&orderDetail)
 		if err != nil {
 			log.Fatalf("Fail Decoder : %v ", err)
@@ -67,7 +68,7 @@ func OrderDetailHandler (w http.ResponseWriter, r *http.Request) {
 		break
 	case "PUT":
 		//Edit data
-		var orderDetail orderDetailStruct 
+		var orderDetail orderDetailStruct
 		err := json.NewDecoder(r.Body).Decode(&orderDetail)
 		if err != nil {
 			log.Fatalf("Failt Decoder : %v ", err)
