@@ -11,6 +11,7 @@ func main() {
 		fmt.Fprintln(w, "hello World google App Engine with Golang")
 	})
 	http.HandleFunc("/user", UserHandler)
+	http.HandleFunc("/user/login", PasswordHandler)
 	http.HandleFunc("/shop", ShopHandler)
 	http.HandleFunc("/menu", MenuHandler)
 	http.HandleFunc("/order", OrderHandler)

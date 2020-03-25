@@ -67,6 +67,12 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		ref := client.Collection(db).NewDoc()
 		user.ID = ref.ID
+		hash, err := HashPassword(fmt.Sprintf("%v", user.Password), fmt.Sprintf("%v", user.Email))
+		if err != nil {
+			json.NewEncoder(w).Encode(map[string]interface{}{"msg": "Encrypt Password Error"})
+		} else {
+			user.Password = hash
+		}
 		doc, err := ref.Set(ctx, user)
 		if err != nil {
 			json.NewEncoder(w).Encode(map[string]interface{}{"msg": "add fail : ", "data": doc})
